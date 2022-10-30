@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
+import { AgGridAngular } from 'ag-grid-angular';
+import { ColDef } from 'ag-grid-community';
 
+declare let $:any;
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -23,7 +26,21 @@ export class AppComponent {
 		{ make: 'Porsche', model: 'Boxster', price: 72000 ,createdAt:'10/04/2022'}
 	];
 
-  onCellClicked(e:any){
-console.log(e);
+   //on cell clicked get data
+  onCellClicked(event:any){
+  console.log('event',event);
   }
+  
+
+  //  showCol(){
+  //   this.gridOptions?.columnApi.setColumnVisible('make',true);
+  //   this.gridOptions?.api.sizeColumnsToFit();
+  //  }
+
+  //  hideCol(){
+  //   this.gridOptions?.columnApi.setColumnVisible('make',false);
+  //   this.gridOptions?.api.sizeColumnsToFit();
+  //  }
+
+ 
 }
