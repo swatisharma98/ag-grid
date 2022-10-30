@@ -14,7 +14,7 @@ export class AppComponent {
 		{headerName: 'Make', field: 'make',editable: true,filter:true ,sortable:true,checkboxSelection:true},
 		{headerName: 'Model', field: 'model',filter:true ,sortable:true},
 		{headerName: 'Price', field: 'price',filter:true,sortable:true},
-    {headerName: 'Created At', field: 'createdAt',filter:"agDateColumnFilter",sortable:true}
+    {headerName: 'Created At', field: 'createdAt',filter:"agDateColumnFilter",sortable:true,editable: true}
 	];
 
 	rowData = [
