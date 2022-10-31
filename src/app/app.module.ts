@@ -4,7 +4,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AgGridModule } from 'ag-grid-angular';
-import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
+
 
 @NgModule({
   declarations: [
@@ -13,8 +14,9 @@ import {MatButtonModule} from '@angular/material/button';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    MatButtonModule,
-    AgGridModule
+    AgGridModule,
+    MatIconModule
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

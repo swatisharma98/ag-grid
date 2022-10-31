@@ -4,10 +4,13 @@
 	class="ag-theme-alpine"
 	[rowData]="rowData" 
   rowSelection = "multiple"
+  #agGrid
+  (gridReady)="onGridReady($event)"
 	[columnDefs]="columnDefs"
-  (cellClicked)="onCellClicked($event)"
+ 
   >
 </ag-grid-angular>
-<!-- 
-<button mat-raised-button color="primary" onclick="showCol()">Show Column</button>
-<button mat-raised-button color="accent" onclick="hideCol()">Hide Column</button> -->
+
+<button mat-raised-button color="primary" (click)="showCol()">Show Column</button>
+<button mat-raised-button color="accent" (click)="hideCol()">Hide Column</button>
+<span class="glyphicon glyphicon-plus"></span>
