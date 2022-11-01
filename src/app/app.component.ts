@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { AgGridAngular } from 'ag-grid-angular';
 import { ColDef, GridOptions } from 'ag-grid-community';
+import { TotalValueRenderer } from './delete-row-component';
 
 
 @Component({
@@ -32,13 +33,13 @@ export class AppComponent {
 		{headerName: 'Model', field: 'model'},
 		{headerName: 'Price', field: 'price'},
     {headerName: 'Created At', field: 'createdAt'},
-    {headerName: 'Delete', field: 'delete', cellRenderer: this.BtnCellRenderer,
-      cellRendererParams: { onClick: this.onDeleteButtonClick.bind(this),label: 'Delete'}}
+    {headerName: 'Delete', field: 'delete', cellRenderer: TotalValueRenderer}
 	];
 
   onDeleteButtonClick(params:any)
  {
   console.log('on delete');
+
  }
 
  
@@ -81,6 +82,14 @@ console.log(' on clicked');
     console.log(newData);
     this.rowData = newData;
   }
+
+  clickecd(){
+    console.log(this.columnDefs);
+    this.columnDefs.push({headerName: 'newCol', field: 'newCol'},);
+    console.log(this.columnDefs);
+  }
+
+ 
   
 
   //  showCol(){
