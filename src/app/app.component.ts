@@ -8,37 +8,49 @@ import { ColDef, GridOptions } from 'ag-grid-community';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
+
+
 export class AppComponent {
   title = 'ag-grid';
   api: any;
 
+  gridApi: any = null;
+  gridColumnApi: any = null;
+
+
+  
 
   // @ViewChild('agGrid') agGrid= AgGridAngular;
 
-
-  gridOption = <AgGridAngular>{
-
-  }
 
  
  
 
   
   columnDefs = [
-		{headerName: 'Make', field: 'make',hide: false, resizable: true},
-		{headerName: 'Model', field: 'model',filter:true ,sortable:true, resizable: true},
-		{headerName: 'Price', field: 'price',filter:true,sortable:true, resizable: true},
-    {headerName: 'Created At', field: 'createdAt',filter:"agDateColumnFilter",sortable:true, resizable: true},
-    {headerName: 'Notes', field: 'notes', cellRenderer: this.BtnCellRenderer,
-         cellRendererParams: this.nowClicked, resizable: true}
-
+		{headerName: 'Make', field: 'make'},
+		{headerName: 'Model', field: 'model'},
+		{headerName: 'Price', field: 'price'},
+    {headerName: 'Created At', field: 'createdAt'},
+    {headerName: 'Delete', field: 'delete', cellRenderer: this.BtnCellRenderer,
+      cellRendererParams: { onClick: this.onDeleteButtonClick.bind(this),label: 'Delete'}}
 	];
 
-  onGridReady(params:any)
-{
-  this.api = params.api;
-}
+  onDeleteButtonClick(params:any)
+ {
+  console.log('on delete');
+ }
 
+ 
+
+  onGridReady(params:any)
+  {
+        this.gridApi = params.api;
+        this.gridColumnApi = params.columnApi;
+        // if (bottomPinnedRowData) {
+        //     gridApi.setPinnedBottomRowData(bottomPinnedRowData);
+        // }
+  }
 
   nowClicked(){
 console.log(' on clicked');
@@ -71,22 +83,45 @@ console.log(' on clicked');
   }
   
 
-   showCol(){
-    this.gridOption.columnDefs=this.columnDefs
-    this.gridOption.columnApi?.setColumnsVisible(['make'],true);
-    // this.gridOption.api?.sizeColumnsToFit();
+  //  showCol(){
+  //   this.gridOption.columnDefs=this.columnDefs
+  //   this.gridOption.columnApi?.setColumnsVisible(['make'],true);
+  //   // this.gridOption.api?.sizeColumnsToFit();
     
-   }
+  //  }
 
-   hideCol(){
+  //  hideCol(){
 
-    console.log('in hide');
-    this.gridOption.columnDefs=this.columnDefs
-    this.gridOption.columnApi?.setColumnsVisible(['make'],false);
+  //   console.log('in hide');
+  //   this.gridOption.columnDefs=this.columnDefs
+  //   this.gridOption.columnApi?.setColumnsVisible(['make'],false);
   
-    // this.gridOption.api?.sizeColumnsToFit();
-    console.log(this.gridOption);
-   }
+  //   // this.gridOption.api?.sizeColumnsToFit();
+  //   console.log(this.gridOption);
+  //  }
+
+
+    gridOpt: GridOptions = {
+        domLayout: 'autoHeight',
+        accentedSort: true,
+        animateRows: true,
+        multiSortKey: 'ctrl',
+        pagination: true,
+        paginationPageSize: 10,
+        scrollbarWidth: 1,
+        defaultColDef: {
+          sortable: true,
+          filter: false,
+          editable: false
+        },
+        rowSelection: 'multiple'
+    };
+
+    defaultColDef = {
+      sortable: true,
+      filter: true,
+      resizable:true
+    };
 
  
 }
