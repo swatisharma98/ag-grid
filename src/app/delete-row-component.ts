@@ -6,7 +6,7 @@ import { ICellRendererParams } from 'ag-grid-community';
 @Component({
     selector: 'total-value-component',
     template: `
-        <span class="glyphicon glyphicon-plus" (click)="buttonClicked()"></span>
+        <i class="fa fa-trash-o" style="font-size:24px;color:red" (click)="buttonClicked($event)"></i>
     `,
   })
 export class TotalValueRenderer implements ICellRendererAngularComp {
@@ -14,6 +14,7 @@ export class TotalValueRenderer implements ICellRendererAngularComp {
 
 
     agInit(params: ICellRendererParams): void {
+        console.log(params);
         this.cellValue = this.getValueToDisplay(params);
       }
     
@@ -28,8 +29,9 @@ export class TotalValueRenderer implements ICellRendererAngularComp {
       getValueToDisplay(params: ICellRendererParams) {
         return params.valueFormatted ? params.valueFormatted : params.value;
       }
-    buttonClicked() {
+    buttonClicked(params:any) {
         alert(`medals won!`);
+       
       }
     
   }

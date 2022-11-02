@@ -26,14 +26,13 @@ export class AppComponent {
 
  
  
-
-  
-  columnDefs = [
-		{headerName: 'Make', field: 'make'},
-		{headerName: 'Model', field: 'model'},
-		{headerName: 'Price', field: 'price'},
-    {headerName: 'Created At', field: 'createdAt'},
-    {headerName: 'Delete', field: 'delete', cellRenderer: TotalValueRenderer}
+ 
+  columnDefs:ColDef[] = [
+		{headerName: 'Make', field: 'make',checkboxSelection:true,headerCheckboxSelection:true,pinned:'left'},
+		{headerName: 'Model', field: 'model',pinned:'left'},
+		{headerName: 'Price', field: 'price',pinned:'left'},
+    {headerName: 'Created At', field: 'createdAt',pinned:'left'},
+    {headerName: 'Delete', field: undefined, cellRenderer:TotalValueRenderer,pinned:'left'}
 	];
 
   onDeleteButtonClick(params:any)
@@ -48,13 +47,11 @@ export class AppComponent {
   {
         this.gridApi = params.api;
         this.gridColumnApi = params.columnApi;
-        // if (bottomPinnedRowData) {
-        //     gridApi.setPinnedBottomRowData(bottomPinnedRowData);
-        // }
+         params.api.sizeColumnsToFit(); 
   }
 
   nowClicked(){
-console.log(' on clicked');
+  console.log(' on clicked');
   }
 
   BtnCellRenderer(){
@@ -89,25 +86,15 @@ console.log(' on clicked');
     console.log(this.columnDefs);
   }
 
+  getSelectedRows(){
+
+   let selectedRows= this.gridApi.getSelectedRows();
+   console.log('selectedRows',selectedRows);
+
+  }
+
  
-  
 
-  //  showCol(){
-  //   this.gridOption.columnDefs=this.columnDefs
-  //   this.gridOption.columnApi?.setColumnsVisible(['make'],true);
-  //   // this.gridOption.api?.sizeColumnsToFit();
-    
-  //  }
-
-  //  hideCol(){
-
-  //   console.log('in hide');
-  //   this.gridOption.columnDefs=this.columnDefs
-  //   this.gridOption.columnApi?.setColumnsVisible(['make'],false);
-  
-  //   // this.gridOption.api?.sizeColumnsToFit();
-  //   console.log(this.gridOption);
-  //  }
 
 
     gridOpt: GridOptions = {
@@ -129,7 +116,7 @@ console.log(' on clicked');
     defaultColDef = {
       sortable: true,
       filter: true,
-      resizable:true
+      resizable:true,
     };
 
  
