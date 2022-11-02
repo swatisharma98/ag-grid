@@ -6,12 +6,11 @@ import { ICellRendererParams } from 'ag-grid-community';
 @Component({
     selector: 'total-value-component',
     template: `
-        
-        <i class="fa fa-trash-o" style="font-size:20px;color:red;" (click)="buttonClicked($event)"></i>
+        <i class="fa fa-edit" style="font-size:20px;color:blue;" (click)="buttonClicked($event)"></i>
         
     `,
   })
-export class TotalValueRenderer implements ICellRendererAngularComp {
+export class EditValueRenderer implements ICellRendererAngularComp {
     public cellValue!: string;
 
 

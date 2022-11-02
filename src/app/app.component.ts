@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { AgGridAngular } from 'ag-grid-angular';
 import { ColDef, GridOptions } from 'ag-grid-community';
 import { TotalValueRenderer } from './delete-row-component';
+import {EditValueRenderer} from './edit-row-component';
 
 
 
@@ -29,11 +30,12 @@ export class AppComponent {
  
  
   columnDefs:ColDef[] = [
+    {headerName: undefined,headerComponentParams:{template: '<i class="fa fa-trash-o" style="font-size:20px;color:red;"></i>' }, field: undefined, cellRenderer:TotalValueRenderer,pinned:'left',width:30},
+    {headerName: undefined,headerComponentParams:{template: '<i class="fa fa-edit" style="font-size:20px;color:blue;"></i>' }, field: undefined, cellRenderer:EditValueRenderer,pinned:'left',width:30},
 		{headerName: 'Make', field: 'make',checkboxSelection:true,headerCheckboxSelection:true,pinned:'left'},
 		{headerName: 'Model', field: 'model',pinned:'left'},
 		{headerName: 'Price', field: 'price',pinned:'left'},
     {headerName: 'Created At', field: 'createdAt',pinned:'left'},
-    {headerName: 'Delete', field: undefined, cellRenderer:TotalValueRenderer,pinned:'left'}
 	];
 
 
@@ -54,8 +56,7 @@ export class AppComponent {
 };
 
 defaultColDef = {
-  sortable: true,
-  resizable:true
+  sortable: true
 };
 
 
@@ -71,7 +72,7 @@ defaultColDef = {
   {
         this.gridApi = params.api;
         this.gridColumnApi = params.columnApi;
-        //  params.api.sizeColumnsToFit(); 
+          params.api.sizeColumnsToFit(); 
   }
 
   nowClicked(){
