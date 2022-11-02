@@ -4,6 +4,7 @@ import { ColDef, GridOptions } from 'ag-grid-community';
 import { TotalValueRenderer } from './delete-row-component';
 
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -35,6 +36,29 @@ export class AppComponent {
     {headerName: 'Delete', field: undefined, cellRenderer:TotalValueRenderer,pinned:'left'}
 	];
 
+
+  gridOpt: GridOptions = {
+    domLayout: 'autoHeight',
+    accentedSort: true,
+    animateRows: true,
+    multiSortKey: 'ctrl',
+    pagination: true,
+    paginationPageSize: 10,
+    scrollbarWidth: 1,
+    defaultColDef: {
+      sortable: true,
+      filter: false,
+      editable: false
+    },
+    rowSelection: 'multiple'
+};
+
+defaultColDef = {
+  sortable: true,
+  resizable:true
+};
+
+
   onDeleteButtonClick(params:any)
  {
   console.log('on delete');
@@ -47,7 +71,7 @@ export class AppComponent {
   {
         this.gridApi = params.api;
         this.gridColumnApi = params.columnApi;
-         params.api.sizeColumnsToFit(); 
+        //  params.api.sizeColumnsToFit(); 
   }
 
   nowClicked(){
@@ -97,27 +121,6 @@ export class AppComponent {
 
 
 
-    gridOpt: GridOptions = {
-        domLayout: 'autoHeight',
-        accentedSort: true,
-        animateRows: true,
-        multiSortKey: 'ctrl',
-        pagination: true,
-        paginationPageSize: 10,
-        scrollbarWidth: 1,
-        defaultColDef: {
-          sortable: true,
-          filter: false,
-          editable: false
-        },
-        rowSelection: 'multiple'
-    };
-
-    defaultColDef = {
-      sortable: true,
-      filter: true,
-      resizable:true,
-    };
-
+  
  
 }
