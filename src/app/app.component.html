@@ -13,11 +13,12 @@
   [pagination]="true"
   [paginationPageSize]="10" 
   [animateRows]="true"
+  [scrollbarWidth]="1"
   >
 </ag-grid-angular>
-<!-- <button mat-raised-button color="primary" (click)="showCol()">Show Column</button>
-<button mat-raised-button color="accent" (click)="hideCol()">Hide Column</button> -->
+
 <button  (click)="getSelectedRows()" style="text-align:center;margin:50px">Selected Rows</button>
+<button (click)="saveAllData()" >Save</button>
 
 
 

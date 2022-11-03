@@ -15,20 +15,12 @@ import {EditValueRenderer} from './edit-row-component';
 
 export class AppComponent {
   title = 'ag-grid';
-  api: any;
+
 
   gridApi: any = null;
   gridColumnApi: any = null;
 
-
-  
-
-  // @ViewChild('agGrid') agGrid= AgGridAngular;
-
-
- 
- 
- 
+  newData:Array<any>=[];
   columnDefs:ColDef[] = [
     {headerName: undefined,
     headerComponentParams:{template: '<i class="fa fa-trash-o" style="font-size:20px;color:red;"></i>' },
@@ -44,7 +36,7 @@ export class AppComponent {
 		{headerName: 'Make', field: 'make',checkboxSelection:true,headerCheckboxSelection:true,pinned:'left'},
 		{headerName: 'Model', field: 'model',pinned:'left'},
 		{headerName: 'Price', field: 'price',pinned:'left'},
-    {headerName: 'Created At', field: 'createdAt',pinned:'left'},
+    {headerName: 'Created At', field: 'createdAt',pinned:'left',editable:true},
 	];
 
 
@@ -64,8 +56,9 @@ export class AppComponent {
     rowSelection: 'multiple'
 };
 
-defaultColDef = {
-  sortable: true
+defaultColDef:ColDef = {
+  sortable: true,
+  resizable:true
 };
 
 
@@ -119,19 +112,23 @@ defaultColDef = {
   }
 
   getSelectedRows(){
-
    let selectedRows= this.gridApi.getSelectedRows();
    console.log('selectedRows',selectedRows);
-
-
-     
-     
   }
 
   onDeleteButtonClick(params:any)
   {
    console.log('on delete called');
    this.gridApi.updateRowData({ remove: [params.data] });
+  }
+
+  saveAllData()
+  {
+    this.gridApi.forEachNode((rowNode:any, index:any) => {
+      console.log(rowNode.data);
+      this.newData.push(rowNode.data);
+    });
+    console.log(this.newData);
   }
 
   }
