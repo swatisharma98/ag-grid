@@ -7,33 +7,35 @@ import { ICellRendererParams } from 'ag-grid-community';
     selector: 'total-value-component',
     template: `
         
-        <i class="fa fa-trash-o" style="font-size:20px;color:red;" (click)="buttonClicked($event)"></i>
+        <i class="fa fa-trash-o" style="font-size:20px;color:red;" (click)="onClick($event)"></i>
         
     `,
   })
 export class TotalValueRenderer implements ICellRendererAngularComp {
-    public cellValue!: string;
 
+  params:any;
+  label: any;
 
-    agInit(params: ICellRendererParams): void {
-        console.log(params);
-        this.cellValue = this.getValueToDisplay(params);
-      }
-    
-      // gets called whenever the user gets the cell to refresh
-      refresh(params: ICellRendererParams) {
-        // set value into cell again
-        this.cellValue = this.getValueToDisplay(params);
-        return true;
-      }
-    
+  agInit(params:any): void {
+    this.params = params;
+    this.label = this.params.label || null;
+  }
 
-      getValueToDisplay(params: ICellRendererParams) {
-        return params.valueFormatted ? params.valueFormatted : params.value;
+  refresh(params?: any): boolean {
+    return true;
+  }
+
+  onClick($event:any) {
+    if (this.params.onClick instanceof Function) {
+      // put anything into params u want pass into parents component
+      const params = {
+        event: $event,
+        rowData: this.params.node.data
+        // ...something
       }
-    buttonClicked(params:any) {
-        alert(`medals won!`);
-       
-      }
+      this.params.onClick(this.params);
+
+    }
+  }
     
   }

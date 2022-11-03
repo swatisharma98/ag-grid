@@ -30,7 +30,16 @@ export class AppComponent {
  
  
   columnDefs:ColDef[] = [
-    {headerName: undefined,headerComponentParams:{template: '<i class="fa fa-trash-o" style="font-size:20px;color:red;"></i>' }, field: undefined, cellRenderer:TotalValueRenderer,pinned:'left',width:30},
+    {headerName: undefined,
+    headerComponentParams:{template: '<i class="fa fa-trash-o" style="font-size:20px;color:red;"></i>' },
+    field: undefined, 
+    cellRenderer: TotalValueRenderer,
+    cellRendererParams: {
+      onClick: this.onDeleteButtonClick.bind(this),
+      label: 'Delete',
+    },
+    pinned:'left',
+    width:30},
     {headerName: undefined,headerComponentParams:{template: '<i class="fa fa-edit" style="font-size:20px;color:blue;"></i>' }, field: undefined, cellRenderer:EditValueRenderer,pinned:'left',width:30},
 		{headerName: 'Make', field: 'make',checkboxSelection:true,headerCheckboxSelection:true,pinned:'left'},
 		{headerName: 'Model', field: 'model',pinned:'left'},
@@ -60,11 +69,7 @@ defaultColDef = {
 };
 
 
-  onDeleteButtonClick(params:any)
- {
-  console.log('on delete');
-
- }
+ 
 
  
 
@@ -88,7 +93,9 @@ defaultColDef = {
 	rowData = [
 		{ make: 'Toyota', model: 'Celica', price: 35000 ,createdAt:'10/04/2022'},
 		{ make: 'Ford', model: 'Mondeo', price: 32000 ,createdAt:'10/04/2022'},
-		{ make: 'Porsche', model: 'Boxster', price: 72000 ,createdAt:'10/04/2022'}
+		{ make: 'Porsche', model: 'Boxster', price: 72000 ,createdAt:'10/04/2022'},
+    { make: 'Por', model: 'Boxster', price: 72000 ,createdAt:'10/04/2022'},
+    { make: 'Porsc', model: 'Boxster', price: 72000 ,createdAt:'10/04/2022'}
 	];
   data = [
 		{ make: 'Toyota', model: 'Celica', price: 35000 ,createdAt:'10/04/2022'}
@@ -116,6 +123,17 @@ defaultColDef = {
    let selectedRows= this.gridApi.getSelectedRows();
    console.log('selectedRows',selectedRows);
 
+
+     
+     
+  }
+
+  onDeleteButtonClick(params:any)
+  {
+   console.log('on delete called');
+   this.gridApi.updateRowData({ remove: [params.data] });
+  }
+
   }
 
  
@@ -124,4 +142,4 @@ defaultColDef = {
 
   
  
-}
+
